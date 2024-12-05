@@ -4,10 +4,12 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CategoryComponent extends Component
 {
-    public $models;
+    protected $paginationTheme = 'bootstrap';
+    use WithPagination;
     public $activeForm = false;
     public $name;
     public $sort;
@@ -24,20 +26,10 @@ class CategoryComponent extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function mount()
-    {
-        $this->all();
-    }
-
-    public function all()
-    {
-        $this->models = \App\Models\Category::orderBy('sort', 'asc')->get();
-        return $this->models;
-    }
-
     public function render()
     {
-        return view('livewire.category-component');
+        $models = \App\Models\Category::orderBy('sort', 'asc')->paginate(10);
+        return view('livewire.category-component',['models' => $models]);
     }
 
     public function create()
@@ -62,7 +54,6 @@ class CategoryComponent extends Component
         \App\Models\Category::create($data);
         $this->activeForm = false;
         $this->reset(['name', 'sort']);
-        $this->all();
     }
 
     public function delete($id)
@@ -71,24 +62,21 @@ class CategoryComponent extends Component
         if ($post) {
             $post->delete();
         }
-        $this->all();
     }
 
     public function edit($id)
     {
         if ($this->editId === $id) {
             $this->reset('editId', 'edit');
-            $this->reset('editSort');
         } else {
             $this->editId = $id;
             $this->editName = $this->models->find($id)->name;
-            $this->editSort = $this->models->find($id)->sort;
         }
     }
 
     public function update($id)
     {
-        $this->models->find($id)->update(['name' => $this->editName, 'sort' => $this->editSort]);
+        $this->models->find($id)->update(['name' => $this->editName]);
         $this->reset('editId', 'editName', 'editSort');
     }
 }

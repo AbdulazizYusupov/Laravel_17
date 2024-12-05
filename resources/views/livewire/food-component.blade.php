@@ -20,6 +20,9 @@
                                 @error('price') <span class="text-danger">{{ $message }}</span> @enderror
                                 <div class="col-3">
                                     <input type="file" class="form-control" wire:model="image">
+                                    @if ($image)
+                                        <img src="{{ $image->temporaryUrl() }}" width="100" class="mt-1">
+                                    @endif
                                 </div>
                                 @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                                 <div class="col-3">
@@ -43,7 +46,7 @@
                                     <table class="table table-bordered table-hover text-center">
                                         <thead>
                                         <tr>
-                                            <th style="width: 50px">№</th>
+                                            <th style="width: 50px">#</th>
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Category</th>
@@ -63,7 +66,8 @@
                                                         {{$model->price}}
                                                     </td>
                                                     <td>{{$model->category->name}}</td>
-                                                    <td><img src="{{ asset('storage/' . $model->image) }}" alt="Food Image" style="width: 100px;" /></td>
+                                                    <td><img src="{{ asset('storage/' . $model->image) }}"
+                                                             alt="Food Image" style="width: 100px;"/></td>
                                                     <td style="display: flex; align-items: center;">
                                                         <button class="btn btn-danger"
                                                                 wire:click="delete({{ $model->id }})"
@@ -103,26 +107,39 @@
                                                         <select class="form-select" wire:model="editCategory">
                                                             @foreach($categories as $category)
                                                                 @if($category->id == $model->category_id)
-                                                                    <option selected value="{{$category->id}}">{{$category->name}}</option>
+                                                                    <option selected
+                                                                            value="{{$category->id}}">{{$category->name}}</option>
                                                                 @else
-                                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                                    <option
+                                                                        value="{{$category->id}}">{{$category->name}}</option>
                                                                 @endif
                                                             @endforeach
                                                         </select>
                                                     </td>
                                                     <td>
-{{--                                                        <input type="file" class="form-control"--}}
-{{--                                                               wire:model="editImage">--}}
+                                                        <input type="file" class="form-control"
+                                                               wire:model="editImage">
+                                                        @if ($editImage)
+                                                            <img src="{{ $editImage->temporaryUrl() }}" width="100" class="mt-1">
+                                                        @endif
                                                     </td>
                                                     <td>
-                                                        <input type="submit" class="btn btn-primary" value="Edit"
-                                                               wire:click="update({{ $model->id }})">
+                                                        <button type="submit" class="btn btn-primary"
+                                                                wire:click="update({{ $model->id }})">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                 height="16" fill="currentColor" class="bi bi-check"
+                                                                 viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+                                                            </svg>
+                                                        </button>
                                                     </td>
                                                 @endif
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
+                                    {{$models->links()}}
                                 </div>
                             </div>
                         </div>

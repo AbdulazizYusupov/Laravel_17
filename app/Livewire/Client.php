@@ -8,20 +8,27 @@ use Livewire\Component;
 
 class Client extends Component
 {
-    public $foods;
     public $categories;
-    public function mount()
-    {
-        $this->all();
-    }
-    public function all()
-    {
-        $this->foods = Food::all();
-        $this->categories = Category::all();
-        return $this->foods;
-    }
     public function render()
     {
-        return view('livewire.client')->layout('components.layouts.main');
+        $this->categories = Category::all();
+        $foods = Food::orderBy('id', 'desc')->paginate(12);
+        return view('livewire.client', ['foods' => $foods])->layout('components.layouts.main',['categories' => $this->categories]);
     }
+    public function addToCart($id)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                'product_id' => $id,
+                'quantity' => 1,
+            ];
+        }
+
+        session()->put('cart', $cart);
+    }
+
 }

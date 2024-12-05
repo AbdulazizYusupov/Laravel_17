@@ -2,13 +2,18 @@
 
 namespace App\Livewire;
 
+use App\Models\Food;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Livewire\WithPagination;
 
 class FoodComponent extends Component
 {
+    protected $paginationTheme = 'bootstrap';
+    use WithPagination;
+
     use WithFileUploads;
-    public $models;
+
     public $categories;
     public $activeForm = false;
     public $name;
@@ -33,21 +38,11 @@ class FoodComponent extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function mount()
-    {
-        $this->all();
-    }
-
-    public function all()
-    {
-        $this->models = \App\Models\Food::orderBy('id', 'desc')->get();
-        $this->categories = \App\Models\Category::all();
-        return $this->models;
-    }
-
     public function render()
     {
-        return view('livewire.food-component');
+        $models = \App\Models\Food::orderBy('id', 'desc')->paginate(10);
+        $this->categories = \App\Models\Category::all();
+        return view('livewire.food-component',['models' => $models]);
     }
 
     public function create()
@@ -72,7 +67,6 @@ class FoodComponent extends Component
 
         $this->activeForm = false;
         $this->reset(['name', 'price', 'category_id', 'image']);
-        $this->all();
     }
 
 
@@ -82,26 +76,41 @@ class FoodComponent extends Component
         if ($post) {
             $post->delete();
         }
-        $this->all();
     }
 
     public function edit($id)
     {
-        if ($this->editId === $id) {
-            $this->reset('editId', 'editName');
-            $this->reset('editPrice', 'editCategory','editImage');
-        } else {
-            $this->editId = $id;
-            $this->editName = $this->models->find($id)->name;
-            $this->editPrice = $this->models->find($id)->price;
-            $this->editCategory = $this->models->find($id)->category_id;
-            $this->editImage = $this->models->find($id)->image;
-        }
+        $food = Food::findOrFail($id);
+        $this->editId = $food->id;
+        $this->editCategory = $food->category_id;
+        $this->editName = $food->name;
+        $this->image = $food->image;
+        $this->editImage = null;
+        $this->editPrice = $food->price;
     }
 
-    public function update($id)
+
+    public function update()
     {
-        $this->models->find($id)->update(['name' => $this->editName, 'price' => $this->editPrice, 'category_id' => $this->editCategory]);
-        $this->reset('editId', 'editName', 'editPrice', 'editImage', 'editCategory');
+        $food = Food::findOrFail($this->editId);
+
+        $filePath = $food->image;
+
+        if ($this->editImage) {
+            if ($filePath && file_exists(storage_path('app/public/' . $filePath))) {
+                unlink(storage_path('app/public/' . $filePath));
+            }
+            $filePath = $this->editImage->store('images', 'public');
+        }
+
+        $food->update([
+            'category_id' => $this->editCategory,
+            'name' => $this->editName,
+            'image' => $filePath,
+            'price' => $this->editPrice,
+        ]);
+
+        $this->reset('editPrice', 'editName', 'editCategory', 'editId', 'editImage', 'image');
     }
+
 }

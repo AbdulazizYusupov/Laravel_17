@@ -12,7 +12,6 @@
                                     <div class="d-flex">
                                         <div class="one-half">
                                             <h3>{{ $food->name }}</h3>
-                                            <button wire:click="addToCart({{$food->id}})" class="btn btn-outline-info">Add to cart</button>
                                         </div>
                                         <div class="one-forth">
                                             <span class="price">{{ $food->price }}</span>
@@ -30,3 +29,4 @@
         </div>
     </section>
 </div>
+

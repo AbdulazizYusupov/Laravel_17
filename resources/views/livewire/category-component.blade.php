@@ -31,9 +31,8 @@
                                     <table class="table table-bordered table-hover text-center">
                                         <thead>
                                         <tr>
-                                            <th style="width: 50px">№</th>
+                                            <th style="width: 50px">#</th>
                                             <th>Name</th>
-                                            <th>Sort</th>
                                             <th style="width: 100px">Options</th>
                                         </tr>
                                         </thead>
@@ -44,9 +43,6 @@
                                                     <th>{{$model->id}}</th>
                                                     <td>
                                                         {{$model->name}}
-                                                    </td>
-                                                    <td>
-                                                        {{$model->sort}}
                                                     </td>
                                                     <td style="display: flex; align-items: center;">
                                                         <button class="btn btn-danger"
@@ -82,19 +78,22 @@
                                                                wire:model="editName">
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control"
-                                                               placeholder="Edit by sort"
-                                                               wire:model="editSort">
-                                                    </td>
-                                                    <td>
-                                                        <input type="submit" class="btn btn-primary" value="Edit"
-                                                               wire:click="update({{ $model->id }})">
+                                                        <button type="submit" class="btn btn-primary"
+                                                                wire:click="update({{ $model->id }})">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                 height="16" fill="currentColor" class="bi bi-check"
+                                                                 viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+                                                            </svg>
+                                                        </button>
                                                     </td>
                                                 @endif
                                             </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
+                                    {{$models->links()}}
                                 </div>
                             </div>
                         </div>
