@@ -24,39 +24,6 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-        <a class="navbar-brand" href="#">FlashFood</a>
-        <div class="collapse navbar-collapse" id="ftco-nav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="/client"
-                       class="nav-link">All</a>
-                </li>
-                @foreach($categories as $category)
-                    <li class="nav-item">
-                        <a href="{{ route('category.foods', $category->id) }}"
-                           class="nav-link">{{ $category->name }}</a>
-                    </li>
-                @endforeach
-                <li class="nav-item ml-3">
-                    <a href="/cart" class="nav-link d-flex align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-cart" viewBox="0 0 16 16">
-                            <path
-                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                        </svg>
-                        <span class="ml-2">Cart
-                            <span class="badge badge-pill badge-light">
-                                {{ session('cart') ? count(session('cart')) : 0 }}
-                            </span>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 {{$slot}}
 

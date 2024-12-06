@@ -135,6 +135,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="/order"
+                           class="nav-link {{ request()->is('order') ? 'active' : '' }}">
+                            <i class="fi fi-rr-hamburger"></i>
+                            <p>
+                                Order
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="/client"
                            class="nav-link">
                             <i class="fi fi-rr-hamburger"></i>
