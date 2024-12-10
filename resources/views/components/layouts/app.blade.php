@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FlashFood</title>
     @livewireStyles
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 
@@ -35,6 +36,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
     <!-- FontAwesome Ikonalarini qo'shish -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
 
 
 </head>
@@ -119,7 +123,11 @@
                     <li class="nav-item">
                         <a href="/category"
                            class="nav-link {{ request()->is('category') ? 'active' : '' }}">
-                            <i class="fi fi-sr-hamburger-soda"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-list-ul" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                            </svg>
                             <p>
                                 Category
                             </p>
@@ -128,7 +136,7 @@
                     <li class="nav-item">
                         <a href="/food"
                            class="nav-link {{ request()->is('food') ? 'active' : '' }}">
-                            <i class="fi fi-rr-hamburger"></i>
+                            <i class="fa fa-cutlery"></i>
                             <p>
                                 Food
                             </p>
@@ -137,16 +145,41 @@
                     <li class="nav-item">
                         <a href="/order"
                            class="nav-link {{ request()->is('order') ? 'active' : '' }}">
-                            <i class="fi fi-rr-hamburger"></i>
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span>Order</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/section"
+                           class="nav-link {{ request()->is('section') ? 'active' : '' }}">
+                            <i class="fa-regular fa-folder"></i>
                             <p>
-                                Order
+                                Sections
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/worker"
+                           class="nav-link {{ request()->is('worker') ? 'active' : '' }}">
+                            <i class="fa-solid fa-user-gear"></i>
+                            <p>
+                                Workers
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/users"
+                           class="nav-link {{ request()->is('users') ? 'active' : '' }}">
+                            <i class="fa-regular fa-user"></i>
+                            <p>
+                                Users
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/client"
                            class="nav-link">
-                            <i class="fi fi-rr-hamburger"></i>
+                            <i class="fa-regular fa-user"></i>
                             <p>
                                 Client
                             </p>
