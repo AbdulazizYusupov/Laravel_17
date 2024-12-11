@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/login',LoginComponent::class);
+Route::get('/logout',LoginComponent::class . '@logout');
 
 Route::middleware('check')->group(function(){
     Route::get('/category',\App\Livewire\CategoryComponent::class);
