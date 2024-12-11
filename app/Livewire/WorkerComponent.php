@@ -15,6 +15,8 @@ class WorkerComponent extends Component
     public $users;
     public $sections;
     public $activeForm = false;
+    public $more = false;
+    public $worker;
     public $user_id;
     public $section_id;
     public $salary_type;
@@ -39,18 +41,21 @@ class WorkerComponent extends Component
         'section_id' => 'required|integer|exists:sections,id',
         'salary_type' => 'required|string',
         'salary' => 'required',
-        'bonus' => 'nullable',
         'month_time' => 'required',
+        'bonus' => 'nullable|numeric',
         'start_time' => 'required',
         'end_time' => 'required',
-        'hours' => 'required',
+        'hours' => 'nullable'
     ];
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
-
+    public function back()
+    {
+        $this->more = false;
+    }
     public function render()
     {
         $this->users = User::all();
@@ -71,7 +76,19 @@ class WorkerComponent extends Component
     public function save()
     {
         $data = $this->validate();
-        Worker::create($data);
+        $time_difference = round((strtotime($data['end_time']) - strtotime($data['start_time'])) / 3600, 2);
+        $data['hours'] = $time_difference;
+        Worker::create([
+            'user_id' => $data['user_id'],
+            'section_id' => $data['section_id'],
+            'salary_type' => $data['salary_type'],
+            'salary' => $data['salary'],
+            'bonus' => $data['bonus'],
+            'month_time' => $data['month_time'],
+            'start_time' => $data['start_time'],
+            'end_time' => $data['end_time'],
+            'hours' => $data['hours'],
+        ]);
         $this->activeForm = false;
         $this->reset(['user_id', 'section_id', 'salary_type', 'salary', 'bonus', 'month_time', 'start_time', 'end_time', 'hours']);
     }
@@ -83,7 +100,11 @@ class WorkerComponent extends Component
             $post->delete();
         }
     }
-
+    public function show($id)
+    {
+        $this->more = true;
+        $this->worker = Worker::find($id);
+    }
     public function edit($id)
     {
         if ($this->editId === $id) {
@@ -99,12 +120,12 @@ class WorkerComponent extends Component
             $this->editMonth_time = $worker->month_time;
             $this->editStart_time = $worker->start_time;
             $this->editEnd_time = $worker->end_time;
-            $this->editHours = $worker->hours;
         }
     }
 
     public function update($id)
     {
+        $time_difference = round((strtotime($this->editEnd_time) - strtotime($this->editStart_time)) / 3600, 2);
         Worker::find($id)->update([
             'user_id' => $this->editUser_id,
             'section_id' => $this->editSection_id,
@@ -114,7 +135,7 @@ class WorkerComponent extends Component
             'month_time' => $this->editMonth_time,
             'start_time' => $this->editStart_time,
             'end_time' => $this->editEnd_time,
-            'hours' => $this->editHours,
+            'hours' => $time_difference,
         ]);
         $this->reset('editId','editUser_id','editSection_id','editSalary_type','editSalary','editBonus','editMonth_time','editStart_time','editEnd_time','editHours');
     }

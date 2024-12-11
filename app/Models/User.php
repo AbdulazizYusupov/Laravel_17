@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Worker::class,'user_id');
     }
+    public function jurnals()
+    {
+        return $this->hasMany(Jurnal::class,'user_id');
+    }
 }

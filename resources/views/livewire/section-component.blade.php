@@ -20,7 +20,7 @@
                         </form>
                     @endif
                     @if(!$activeForm)
-                        <div class="container mt-3">
+                        <div class="container-fluid mt-3">
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table table-bordered table-hover text-center">

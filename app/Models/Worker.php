@@ -16,4 +16,8 @@ class Worker extends Model
     {
         return $this->belongsTo(Section::class,'section_id');
     }
+    public function jurnals()
+    {
+        return $this->hasMany(Jurnal::class,'worker_id');
+    }
 }
