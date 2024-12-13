@@ -121,12 +121,6 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="card-footer d-flex justify-content-end">
-                                        <button wire:click="topshirish({{ $done->id }})"
-                                            class="btn btn-success btn-sm">
-                                            <i class="fas fa-check"></i> Accept
-                                        </button>
-                                    </div>
                                 @endif
                             </div>
                         @endforeach

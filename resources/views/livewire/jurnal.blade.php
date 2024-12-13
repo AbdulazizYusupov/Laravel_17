@@ -37,7 +37,7 @@
                                                             class="btn btn-{{ $dayTime->time >= $model->hours ? 'success' : 'danger' }}"
                                                             data-bs-toggle="tooltip"
                                                             title="Start time: {{ \Carbon\Carbon::parse($model->jurnals->where('date', $day->format('Y-m-d'))->where('user_id', $model->user->id)->first()->start_time)->format('H:i') }} | End time: {{ \Carbon\Carbon::parse($model->jurnals->where('date', $day->format('Y-m-d'))->where('user_id', $model->user->id)->first()->end_time)->format('H:i') }} |
-                                                                Reason :  {{ $model->jurnals->where('date', $day->format('Y-m-d'))->where('user_id', $model->user->id)->first()->end_time >= $model->end_time ? 'Good job' : $model->end_time . 'hours left' }}"
+                                                                Reason :  {{ $model->jurnals->where('date', $day->format('Y-m-d'))->where('user_id', $model->user->id)->first()->end_time >= $model->end_time? 'Good job': $model->end_time . 'hours left' }}"
                                                             wire:click="openModal({{ $dayTime->id }})">
                                                             {{ number_format($dayTime->time) }}
                                                         </button>

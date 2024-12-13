@@ -191,22 +191,24 @@
                                 </a>
                             </li>
                         @endif
-                        <li class="nav-item">
-                            <a href="/client" class="nav-link">
-                                <i class="fa-regular fa-user"></i>
-                                <p>
-                                    Client
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/logout" class="nav-link {{ request()->is('logout') ? 'active' : '' }}">
-                                <i class="fas fa-sign-out-alt"></i>
-                                <p>
-                                    Logout
-                                </p>
-                            </a>
-                        </li>
+                        @if (auth()->check())
+                            <li class="nav-item">
+                                <a href="/client" class="nav-link">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>
+                                        Client
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/logout" class="nav-link {{ request()->is('logout') ? 'active' : '' }}">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Logout
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
             </div>

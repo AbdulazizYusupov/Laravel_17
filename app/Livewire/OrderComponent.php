@@ -92,19 +92,6 @@ class OrderComponent extends Component
             $this->allow3 = $id;
         }
     }
-    public function topshirish($id)
-    {
-        $order = Order::findOrFail($id);
-
-        $order->status = 4;
-        $order->save();
-        $orderItems = OrderItems::where('order_id',$order->id)->get();
-
-        foreach ($orderItems as $orderItem) {
-            $orderItem->status = 4;
-            $orderItem->save();
-        }
-    }
     public function see($id)
     {
         if ($id == $this->allow4) {
