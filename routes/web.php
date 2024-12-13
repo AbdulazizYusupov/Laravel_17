@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\LoginComponent;
+use App\Livewire\OrdersComponent;
 use App\Livewire\WorkerComponent;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,10 @@ Route::middleware('check')->group(function(){
     Route::get('/worker',WorkerComponent::class);
     Route::get('/jurnal',\App\Livewire\JurnalComponent::class);
 });
+Route::get('/orders',OrdersComponent::class);
 Route::get('/client',\App\Livewire\Client::class);
 Route::get('/category/{category}', \App\Livewire\FilterCategory::class)->name('category.foods');
 Route::get('/cart',\App\Livewire\CartComponent::class);
+Route::get('/purchase',\App\Livewire\Purchase::class);
 
 

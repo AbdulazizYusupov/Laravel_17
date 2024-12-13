@@ -121,64 +121,76 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item">
-                            <a href="/category" class="nav-link {{ request()->is('category') ? 'active' : '' }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
-                                </svg>
-                                <p>
-                                    Category
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/food" class="nav-link {{ request()->is('food') ? 'active' : '' }}">
-                                <i class="fa fa-cutlery"></i>
-                                <p>
-                                    Food
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/order" class="nav-link {{ request()->is('order') ? 'active' : '' }}">
-                                <i class="fa-solid fa-arrow-right"></i>
-                                <p>Order</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/section" class="nav-link {{ request()->is('section') ? 'active' : '' }}">
-                                <i class="fa-regular fa-folder"></i>
-                                <p>
-                                    Sections
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/worker" class="nav-link {{ request()->is('worker') ? 'active' : '' }}">
-                                <i class="fa-solid fa-user-gear"></i>
-                                <p>
-                                    Workers
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/jurnal" class="nav-link {{ request()->is('jurnal') ? 'active' : '' }}">
-                                <i class="fa-solid fa-book"></i>
-                                <p>
-                                    Journal
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/users" class="nav-link {{ request()->is('users') ? 'active' : '' }}">
-                                <i class="fa-regular fa-user"></i>
-                                <p>
-                                    Users
-                                </p>
-                            </a>
-                        </li>
+                        @if (auth()->user()->role == 'waiter')
+                            <li class="nav-item">
+                                <a href="/orders" class="nav-link {{ request()->is('orders') ? 'active' : '' }}">
+                                    <i class="fa fa-cutlery"></i>
+                                    <p>
+                                        Orders
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->role == 'admin')
+                            <li class="nav-item">
+                                <a href="/category" class="nav-link {{ request()->is('category') ? 'active' : '' }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                                    </svg>
+                                    <p>
+                                        Category
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/food" class="nav-link {{ request()->is('food') ? 'active' : '' }}">
+                                    <i class="fa fa-cutlery"></i>
+                                    <p>
+                                        Food
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/order" class="nav-link {{ request()->is('order') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                    <p>Order</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/section" class="nav-link {{ request()->is('section') ? 'active' : '' }}">
+                                    <i class="fa-regular fa-folder"></i>
+                                    <p>
+                                        Sections
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/worker" class="nav-link {{ request()->is('worker') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-user-gear"></i>
+                                    <p>
+                                        Workers
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/jurnal" class="nav-link {{ request()->is('jurnal') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-book"></i>
+                                    <p>
+                                        Journal
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/users" class="nav-link {{ request()->is('users') ? 'active' : '' }}">
+                                    <i class="fa-regular fa-user"></i>
+                                    <p>
+                                        Users
+                                    </p>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a href="/client" class="nav-link">
                                 <i class="fa-regular fa-user"></i>
@@ -202,6 +214,13 @@
         {{ $slot }}
     </div>
     @livewireScripts
+    <script>
+        // Enable tooltips for elements with 'data-bs-toggle="tooltip"'
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v1.x.x/dist/livewire-sortable.js"></script>
     <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
     <!-- jQuery -->

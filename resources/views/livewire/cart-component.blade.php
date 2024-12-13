@@ -28,6 +28,16 @@
                         </span>
                         </a>
                     </li>
+                    <li class="nav-item ml-3">
+                        <a href="/purchase" class="nav-link d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-bag-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M8 1.5a2 2 0 0 1 2 2V3h3.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 12 12H4a.5.5 0 0 1-.491-.408l-1.5-8A.5.5 0 0 1 2.5 3H6v-.5a2 2 0 0 1 2-2zm-1 2V3h2v-.5a1 1 0 1 0-2 0zm-3.682 1l1.313 7h8.738l1.313-7H3.318zM5 11.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5zm7.354-5.646a.5.5 0 1 1-.708.708l-2-2a.5.5 0 0 1 .708-.708l1.147 1.146L11.646 5.5z" />
+                            </svg>
+                            <span class="ml-2">Purchased</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

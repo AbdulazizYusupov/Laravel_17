@@ -52,7 +52,6 @@ class LoginComponent extends Component
             $worker_id = $user->worker ? $user->worker->id : null;
 
             if (!$worker_id) {
-                session()->flash('error', 'Hodim topilmadi!');
                 return back();
             }
 
@@ -63,8 +62,11 @@ class LoginComponent extends Component
                 ->first();
 
             if ($existingJurnal) {
-                session()->flash('success', 'Siz tizimga muvaffaqiyatli kirdingiz!');
-                return redirect('/category');
+                if (auth()->user()->role == 'waiter') {
+                    return redirect('/orders');
+                } elseif (auth()->user()->role == 'admin') {
+                    return redirect('/category');
+                }
             }
 
             $start_time = now()->toTimeString();
@@ -78,10 +80,12 @@ class LoginComponent extends Component
                 'time' => 0,
             ]);
 
-            session()->flash('success', 'Siz tizimga muvaffaqiyatli kirdingiz! Jurnal saqlandi.');
-            return redirect('/category');
+            if (auth()->user()->role == 'waiter') {
+                return redirect('/orders');
+            } elseif (auth()->user()->role == 'admin') {
+                return redirect('/category');
+            }
         } else {
-            session()->flash('error', 'Foydalanuvchi topilmadi!');
             return back();
         }
     }

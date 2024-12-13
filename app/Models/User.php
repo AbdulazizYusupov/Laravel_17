@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Jurnal::class,'user_id');
     }
+    public function order()
+    {
+        return $this->belongsToMany('App\Models\Order','user_orders','user_id','order_id');
+    }
 }
