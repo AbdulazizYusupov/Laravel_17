@@ -46,8 +46,8 @@
                                                 <td>{{ $model->salary }}</td>
                                                 <td>{{ $model->bonus }}</td>
                                                 <td>
-                                                    @if ($model->oyliks && $model->oyliks->count() > 0)
-                                                        {{ $model->oyliks->first()->bonus }}
+                                                    @if ($model->oyliks->where('date', $data) && $model->oyliks->where('date', $data)->count() > 0)
+                                                        {{ $model->oyliks->where('date', $data)->first()->bonus }}
                                                     @else
                                                         {{ 0 }}
                                                     @endif

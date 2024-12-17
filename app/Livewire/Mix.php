@@ -84,7 +84,7 @@ class Mix extends Component
             } elseif ($worker->section->name == 'Managers') {
                 $orders = Order::all();
                 $add = 0;
-                foreach ($orders as $order) {
+                foreach ($orders->where('date',$this->data) as $order) {
                     $add = $add + $order->summ;
                 }
                 Salary::create([
