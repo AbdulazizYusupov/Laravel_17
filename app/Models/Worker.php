@@ -20,4 +20,8 @@ class Worker extends Model
     {
         return $this->hasMany(Jurnal::class,'worker_id');
     }
+    public function oyliks()
+    {
+        return $this->hasMany(Salary::class,'worker_id');
+    }
 }

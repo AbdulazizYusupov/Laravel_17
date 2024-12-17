@@ -190,6 +190,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/fix" class="nav-link {{ request()->is('fix') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-money-bill"></i>
+                                    <p>
+                                        Fix salary
+                                    </p>
+                                </a>
+                            </li>
                         @endif
                         @if (auth()->check())
                             <li class="nav-item">
