@@ -26,5 +26,6 @@ Route::get('/category/{category}', \App\Livewire\FilterCategory::class)->name('c
 Route::get('/cart',\App\Livewire\CartComponent::class);
 Route::get('/purchase',\App\Livewire\Purchase::class);
 Route::get('/fix',\App\Livewire\FixComponent::class);
+Route::get('/mix',\App\Livewire\Mix::class);
 
 

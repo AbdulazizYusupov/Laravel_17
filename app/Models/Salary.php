@@ -10,6 +10,7 @@ class Salary extends Model
         'worker_id',
         'date',
         'type',
+        'bonus',
         'given',
         'left',
         'salary'

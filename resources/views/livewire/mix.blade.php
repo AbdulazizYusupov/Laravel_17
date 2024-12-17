@@ -5,7 +5,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col">
-                            <h1>Fix Salary</h1>
+                            <h1>Mix Salary</h1>
                         </div>
                     </div>
                 </div>
@@ -27,6 +27,8 @@
                                             <th>ID</th>
                                             <th>Worker name</th>
                                             <th>Salary</th>
+                                            <th>Bonus</th>
+                                            <th>Bonus cash</th>
                                             <th>Given</th>
                                             <th>Left</th>
                                             <th>Add</th>
@@ -42,6 +44,14 @@
                                                 <th>{{ $int++ }}</th>
                                                 <td>{{ $model->user->name }}</td>
                                                 <td>{{ $model->salary }}</td>
+                                                <td>{{ $model->bonus }}</td>
+                                                <td>
+                                                    @if ($model->oyliks && $model->oyliks->count() > 0)
+                                                        {{ $model->oyliks->first()->bonus }}
+                                                    @else
+                                                        {{ 0 }}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($model->oyliks && $model->oyliks->count() > 0)
                                                         @foreach ($model->oyliks->where('date', $select) as $oylik)
@@ -60,6 +70,9 @@
                                                     @else
                                                         {{ $model->salary }}
                                                     @endif
+                                                    @php
+                                                        $sum = 0;
+                                                    @endphp
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary rounded-pill"

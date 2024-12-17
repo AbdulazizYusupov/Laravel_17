@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('worker_id')->constrained('workers')->onDelete('cascade');
             $table->date('date');
             $table->string('type');
+            $table->string('bonus')->default(null);
             $table->string('given');
             $table->string('left');
             $table->string('salary');

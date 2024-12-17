@@ -71,5 +71,4 @@ class FixComponent extends Component
             ]);
         }
     }
-
 }

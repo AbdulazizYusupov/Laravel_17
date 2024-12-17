@@ -192,9 +192,17 @@
                             </li>
                             <li class="nav-item">
                                 <a href="/fix" class="nav-link {{ request()->is('fix') ? 'active' : '' }}">
-                                    <i class="fa-solid fa-money-bill"></i>
+                                    <i class="fa-solid fa-coins"></i>
                                     <p>
                                         Fix salary
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/mix" class="nav-link {{ request()->is('mix') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-dollar-sign"></i>
+                                    <p>
+                                        Mix salary
                                     </p>
                                 </a>
                             </li>
